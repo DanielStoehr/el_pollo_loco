@@ -31,13 +31,13 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
-    playAnimation(images, endless = true) {
+    playAnimation(images) {
         let i = this.currentImage % images.length;
         let path = images[i];
         this.img = this.imageCache[path];
 
         //beende wenn letztes Bild
-        if (!endless && i + 1 === images.length) {
+        if (this.isDead() && i + 1 === images.length) {
             return;
         }
 

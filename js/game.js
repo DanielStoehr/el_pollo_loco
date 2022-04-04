@@ -3,10 +3,17 @@ let world;
 let keyboard = new Keyboard();
 
 function init() {
+    document.getElementById("start-container").classList.add("d-none");
+    document.getElementById("canvas").classList.remove("d-none");
     canvas = document.getElementById("canvas");
+    init_level();
     world = new World(canvas, keyboard);
+}
 
-    console.log("World:", world);
+function restart() {
+    document.getElementById("restart-button").classList.add("d-none");
+    world.backgroundSound.pause();
+    init();
 }
 
 window.addEventListener("keydown", (e) => {

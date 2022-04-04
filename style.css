@@ -2,8 +2,90 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
 }
 
 canvas {
     background-color: black;
+}
+
+img {
+    width: 720px;
+    height: 480px;
+}
+
+#start-container {
+    position: relative;
+}
+
+#canvas-container {
+    position: relative;
+}
+
+#start-button {
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+}
+
+#restart-button {
+    bottom: 16px;
+    right: 16px
+}
+
+.button {
+    z-index: 1;
+    position: absolute;
+    background-color: #FFA100;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 250ms ease-in-out;
+    border: 1px solid black
+}
+
+.button:hover {
+    background-color: #FFDF00;
+}
+
+#controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    top: 420px;
+    left: -340px;
+    z-index: 1;
+    width:720px
+}
+
+@media (max-width: 720px) {
+    canvas {
+        width: 100%;
+    }
+
+    #start-container img {
+        width: 100%;
+    }
+}
+
+@media (max-height: 480px) {
+    canvas {
+        height: 100vh;
+    }
+
+    #start-container img {
+        height: 100vh;
+    }
+
+    #start-button {
+        top: 32px
+    }
+
+    h1 {
+        display: none;
+    }
+}
+
+.d-none {
+    display: none;
 }

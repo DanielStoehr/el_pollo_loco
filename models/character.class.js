@@ -38,6 +38,9 @@ class Character extends MovableObject {
     world;
     speed = 10;
     WALKING_AUDIO = new Audio("audio/walking.mp3");
+    JUMPING_AUDIO = new Audio("audio/jump.mp3");
+    collectedCoins = [];
+    collectedBottles = [];
 
     constructor() {
         super();
@@ -53,19 +56,24 @@ class Character extends MovableObject {
     animate() {
         setInterval(() => {
             this.WALKING_AUDIO.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && !this.isDead()) {
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && this.world.movingAllowed()) {
                 this.WALKING_AUDIO.play();
                 this.otherDirection = false;
                 this.moveRight();
             }
 
-            if (this.world.keyboard.LEFT && this.x > 0 && !this.isDead()) {
+            if (this.world.keyboard.LEFT && this.x > 0 && this.world.movingAllowed()) {
                 this.WALKING_AUDIO.play();
                 this.otherDirection = true;
                 this.moveLeft();
             }
 
-            if ((this.world.keyboard.UP || this.world.keyboard.SPACE) && !this.isAboveGround() && !this.isDead()) {
+            if (
+                (this.world.keyboard.UP || this.world.keyboard.SPACE) &&
+                !this.isAboveGround() &&
+                this.world.movingAllowed()
+            ) {
+                this.JUMPING_AUDIO.play();
                 this.jump();
             }
 
@@ -74,12 +82,12 @@ class Character extends MovableObject {
 
         setInterval(() => {
             if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD, false);
+                this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.playAnimation(this.IMAGES_JUMPING);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            } else if ((this.world.keyboard.RIGHT || this.world.keyboard.LEFT) && this.world.movingAllowed()) {
                 this.playAnimation(this.IMAGES_WALKING);
             }
         }, 50);
