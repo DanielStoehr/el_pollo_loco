@@ -16,19 +16,15 @@ class MovableObject extends DrawableObject {
     }
 
     isAboveGround() {
-        return this.y < 155;
+        if (this instanceof ThrowableObject) {
+            return true;
+        } else {
+            return this.y < 155;
+        }
     }
 
     moveRight() {
         this.x += this.speed;
-    }
-
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
     }
 
     moveLeft() {

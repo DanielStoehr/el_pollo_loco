@@ -8,10 +8,15 @@ class StatusBar extends DrawableObject {
         "img/7.Marcadores/Barra/Marcador vida/azul/100_.png",
     ];
     percentage = 100;
+    x = 40;
+    y = 0;
+    width = 200;
+    height = 60;
 
     constructor() {
         super();
         this.loadImages(this.IMAGES);
+        this.setPercentage(100);
     }
 
     setPercentage(percentage) {
