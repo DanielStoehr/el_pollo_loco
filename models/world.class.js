@@ -13,7 +13,7 @@ class World {
     backgroundSound = new Audio("audio/mexican-background.mp3");
 
     constructor(canvas, keyboard) {
-        this.endScreen.src = "img/9.Intro _ Outro Image/_Game over_ screen/3.Game over.png";
+        this.endScreen.src = "img/9.Intro_OutroImage/_Game over_ screen/3.Game over.png";
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.keyboard = keyboard;
@@ -29,7 +29,16 @@ class World {
             this.checkThrowObjects();
             this.checkCollections(this.level.coins, this.character.collectedCoins, this.coinBar);
             this.checkCollections(this.level.bottles, this.character.collectedBottles, this.bottleBar);
+            this.checkEndbossContact();
         }, 200);
+    }
+
+    checkEndbossContact() {
+        this.level.enemies.forEach((enemy) => {
+            if (enemy instanceof Endboss && this.character.x > 1300) {
+                enemy.hadFirstContact = true;
+            }
+        });
     }
 
     checkGameEnd() {
@@ -37,9 +46,11 @@ class World {
         this.level.enemies.forEach((enemy) => {
             if (enemy instanceof Endboss && enemy.energy === 0) {
                 result = true;
-                document.getElementById("restart-button").classList.remove("d-none");
             }
         });
+        if (this.character.energy === 0) {
+            result = true;
+        }
         return result;
     }
 
@@ -92,6 +103,9 @@ class World {
     }
 
     draw() {
+        if (!this.checkGameEnd()) {
+            document.getElementById("restart-button").classList.add("d-none");
+        }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -128,6 +142,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.ctx.drawImage(this.endScreen, 0, 0, 720, 480);
         this.ctx.translate(this.camera_x, 0);
+        document.getElementById("restart-button").classList.remove("d-none");
     }
 
     addObjectsToMap(objects) {

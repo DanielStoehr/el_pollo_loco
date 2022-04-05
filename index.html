@@ -27,14 +27,39 @@
     <script src="js/game.js"></script>
 </head>
 <body>
+<div id="game-container">
 <h1>El Pollo Loco</h1>
 <div id="canvas-container">
     <canvas id='canvas' width="720" height="480" class="d-none"></canvas>
     <button class="button d-none" id="restart-button" onclick="restart()">Restart</button>
+    <img src="img/view-fullscreen.svg" alt="view_fullscreen" id="fullscreen-button" onclick="viewFullscreen()">
+    <div id="controls" class="d-none">
+        <div class="control-item">
+            <img src="img/arrow_left.svg" alt="image_arrow_left">
+            <span>Laufen</span>
+        </div>
+        <div class="control-item">
+            <img src="img/arrow_right.svg" alt="image_arrow_right">
+            <span>Laufen</span>
+        </div>
+        <div class="control-item">
+            <img src="img/arrow_up.svg" alt="image_arrow_up">
+            <span>Springen</span>
+        </div>
+        <div class="control-item">
+            <span>SPACE</span>
+            <span>Springen</span>
+        </div>
+        <div class="control-item">
+            <span>D</span>
+            <span>Flasche werfen</span>
+        </div>
+    </div>
 </div>
 <div id="start-container">
     <button class="button" id="start-button" onclick="init()">Start</button>
-    <img src="img/9.Intro _ Outro Image/Start Screen/Opción 1.png" alt="start-image">
+    <img src="img/9.Intro_OutroImage/Start_Screen/Opcion1.png" alt="start-image">
+</div>
 </div>
 </body>
 </html>

@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 
 function init() {
     document.getElementById("start-container").classList.add("d-none");
+    document.getElementById("controls").classList.remove("d-none");
     document.getElementById("canvas").classList.remove("d-none");
     canvas = document.getElementById("canvas");
     init_level();
@@ -11,7 +12,6 @@ function init() {
 }
 
 function restart() {
-    document.getElementById("restart-button").classList.add("d-none");
     world.backgroundSound.pause();
     init();
 }
@@ -33,3 +33,7 @@ window.addEventListener("keyup", (e) => {
     if (e.code === "ArrowDown") keyboard.DOWN = false;
     if (e.code === "KeyD") keyboard.D = false;
 });
+
+function viewFullscreen() {
+    document.getElementById("game-container").requestFullscreen();
+}
